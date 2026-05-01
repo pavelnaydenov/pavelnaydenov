@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pavel Naydenov</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F5F0;
+    --ink: #1A1A18;
+    --mid: #6B6B60;
+    --accent: #2C2C28;
+    --rule: #D8D4CC;
+    --warm: #E8E2D8;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 3rem;
+    background: rgba(247,245,240,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .nav-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 72px;
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 4rem 6rem 3rem;
+  }
+
+  .hero-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 2rem;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    margin-bottom: 2rem;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .hero-roles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .role-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.9rem;
+    border: 1px solid var(--rule);
+    color: var(--mid);
+  }
+
+  .hero-intro {
+    font-size: 1rem;
+    color: var(--mid);
+    max-width: 420px;
+    line-height: 1.75;
+  }
+
+  .hero-image {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    filter: grayscale(8%);
+  }
+
+  .hero-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, var(--bg) 0%, transparent 8%);
+  }
+
+  /* SECTION BASE */
+  section {
+    padding: 6rem 3rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .section-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+    max-width: 120px;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--ink);
+    margin-bottom: 1.4rem;
+  }
+
+  .about-text p:last-child { margin-bottom: 0; }
+
+  .about-details h4 {
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+  }
+
+  .about-details h4:first-child { margin-top: 0; }
+
+  .about-details p, .about-details li {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  .about-details ul { list-style: none; }
+
+  .about-details li {
+    padding: 0.3rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .about-details li:last-child { border-bottom: none; }
+
+  /* EDUCATION */
+  .edu-item {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .edu-item:first-child { padding-top: 0; }
+  .edu-item:last-child { border-bottom: none; }
+
+  .edu-year {
+    font-size: 0.78rem;
+    color: var(--mid);
+    letter-spacing: 0.06em;
+    padding-top: 0.2rem;
+  }
+
+  .edu-body h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 0.3rem;
+    line-height: 1.3;
+  }
+
+  .edu-body p {
+    font-size: 0.88rem;
+    color: var(--mid);
+    line-height: 1.6;
+  }
+
+  /* WORK */
+  .work-category {
+    margin-bottom: 4rem;
+  }
+
+  .work-category:last-child { margin-bottom: 0; }
+
+  .work-cat-title {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .work-item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 1.5rem 2rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+
+  .work-item:last-child { border-bottom: none; }
+
+  .work-year {
+    font-size: 0.78rem;
+    color: var(--mid);
+  }
+
+  .work-title {
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  .work-location {
+    font-size: 0.78rem;
+    color: var(--mid);
+    white-space: nowrap;
+  }
+
+  /* CONTACT */
+  #contact {
+    background: var(--ink);
+    color: var(--bg);
+    border-top: none;
+  }
+
+  #contact .section-label {
+    color: rgba(247,245,240,0.45);
+  }
+
+  #contact .section-label::after {
+    background: rgba(247,245,240,0.15);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+  }
+
+  .contact-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+    color: var(--bg);
+  }
+
+  .contact-headline em { font-style: italic; }
+
+  .contact-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    justify-content: flex-end;
+  }
+
+  .contact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .contact-item span:first-child {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(247,245,240,0.45);
+  }
+
+  .contact-item a, .contact-item span:last-child {
+    font-size: 0.95rem;
+    color: var(--bg);
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .contact-item a:hover { opacity: 0.65; }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    padding: 1.5rem 3rem;
+    border-top: 1px solid rgba(247,245,240,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-size: 0.7rem;
+    color: rgba(247,245,240,0.3);
+    letter-spacing: 0.08em;
+  }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+
+    #hero { grid-template-columns: 1fr; }
+    .hero-text { padding: 4rem 1.5rem 3rem; }
+    .hero-image { height: 55vw; }
+    .hero-image::after { display: none; }
+
+    section { padding: 4rem 1.5rem; }
+
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .edu-item { grid-template-columns: 80px 1fr; gap: 1rem; }
+    .work-item { grid-template-columns: 60px 1fr; }
+    .work-location { display: none; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-name">Pavel Naydenov</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-text">
+    <p class="hero-label">Vienna, Austria</p>
+    <h1 class="hero-name">Pavel<br><em>Naydenov</em></h1>
+    <div class="hero-roles">
+      <span class="role-tag">Director, BCI Wittgenstein</span>
+      <span class="role-tag">Curator</span>
+      <span class="role-tag">Artist</span>
+      <span class="role-tag">Choir Conductor</span>
+      <span class="role-tag">Researcher</span>
+    </div>
+    <p class="hero-intro">Cultural manager, creative researcher, curator, artist, and musician working at the intersection of contemporary art, social design, and cultural diplomacy in Vienna.</p>
+  </div>
+  <div class="hero-image">
+    <img src="pavel_naydenov.jpg" alt="Pavel Naydenov" />
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <p class="section-label">About</p>
+    <div class="about-grid fade-up">
+      <div class="about-text">
+        <p>Pavel Naydenov is a cultural manager, creative researcher, curator, artist, and musician born in Bulgaria. Since 2016 he has been based in Vienna, Austria, where he completed a Master's degree in Social Design — Art as Urban Innovation at the Universität für Angewandte Kunst Wien.</p>
+        <p>His multidisciplinary practice spans cultural management, artistic research, choral conducting, and curatorial work. He has collaborated with leading cultural institutions and festivals in Vienna including Wiener Festwochen, Vienna Art Week, Parallel Vienna, WienWoche, and the Urbanize Festival, as well as with MA7 — the City of Vienna's Department of Culture.</p>
+        <p>As Director of the Bulgarian Cultural Institute Wittgenstein House in Vienna, he works to position Bulgarian culture as a vital presence in the city's cultural calendar. He is the founder and conductor of Construction Choir Collective — an international ensemble representing over twenty nationalities — and of N Choir, an Austrian ensemble specialising in Bulgarian choral music, laureate of international choral festivals.</p>
+        <p>From 2020 to 2023, he managed the annual cultural programme of Wild im West, a venue for urban culture, music, performance and outdoor cinema supported by the City of Vienna, where he organised 3–5 weekly events with audiences of up to 700 people and presented more than 40 Bulgarian artists based in Austria.</p>
+      </div>
+      <div class="about-details">
+        <h4>Based in</h4>
+        <p>Vienna, Austria</p>
+        <h4>Languages</h4>
+        <ul>
+          <li>Bulgarian</li>
+          <li>English</li>
+          <li>German</li>
+        </ul>
+        <h4>Current roles</h4>
+        <ul>
+          <li>Director, BCI Wittgenstein House, Vienna</li>
+          <li>Conductor, Construction Choir Collective</li>
+          <li>Conductor, N Choir</li>
+          <li>Creative Researcher, Universität für Angewandte Kunst Wien</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <p class="section-label">Education</p>
+
+    <div class="edu-item fade-up">
+      <div class="edu-year">2017 – 2020</div>
+      <div class="edu-body">
+        <h3>MA — Social Design: Art as Urban Innovation</h3>
+        <p>Universität für Angewandte Kunst Wien (University of Applied Arts Vienna)<br>Class of Prof. Dr. Brigitte Felderer</p>
+      </div>
+    </div>
+
+    <div class="edu-item fade-up">
+      <div class="edu-year">2008 – 2012</div>
+      <div class="edu-body">
+        <h3>BA — Music Pedagogy &amp; Choral Conducting</h3>
+        <p>Academy of Music, Dance and Fine Arts "Prof. Asen Diamandiev", Plovdiv<br>Specialisations: Pop &amp; Jazz Singing; Choral Conducting (class of Assoc. Prof. Dr. V. Geleva)</p>
+      </div>
+    </div>
+
+    <div class="edu-item fade-up">
+      <div class="edu-year">1996 – 2008</div>
+      <div class="edu-body">
+        <h3>Secondary Education — Music Specialism</h3>
+        <p>Secondary School "Otets Paisiy", Vratsa<br>Specialised school of music, choreography and fine arts</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="section-inner">
+    <p class="section-label">Selected Work</p>
+
+    <div class="work-category fade-up">
+      <p class="work-cat-title">Curatorial &amp; Exhibitions</p>
+
+      <div class="work-item">
+        <span class="work-year">2024</span>
+        <span class="work-title">UN PLATZ — performance/exhibition</span>
+        <span class="work-location">Vienna</span>
+      </div>
+      <div class="work-item">
+        <span class="work-year">2024</span>
+        <span class="work-title">Milost Mira — Songs for the Dead, MUSMIG Museum for Migration</span>
+        <span class="work-location">Vienna</span>
+      </div>
+      <div class="work-item">
+        <span class="work-year">2023</span>
+        <span class="work-title">[ Error… message delivered ] — Art Start, Gallery Credo Bonum &amp; Goethe-Institut</span>
+        <span class="work-location">Sofia</span>
+      </div>
+      <div class="work-item">
+        <span class="work-year">2023</span>
+        <span class="work-title">VokaleVerwandlungen — International Choral Festival (Artistic Director)</span>
+        <span class="work-location">Vienna</span>
+      </div>
+      <div class="work-item">
+        <span class="work-year">2021</span>
+        <span class="work-title">10+1: Audio and Visual Codes of National Identity — Bulgarian Cultural Institute Wittgenstein House</span>
+        <span class="work-location">Vienna</span>
+      </div>
+      <div class="work-item">
+        <span class="work-year">2017</span>
+        <span class="work-title">Composer Ivan Spasov — Sky-blue Morning, Noon and the Path Beyond Noon, Gallery Swimming Pool</span>
+        <span class="work-location">Sofia</span>
+      </div>
+    </div>
+
+    <div class="work-category fade-up">
+      <p class="work-cat-title">Artistic &amp; Performance</p>
+
+      <div class="work-item">
+        <span class="work-year">2024</span>
+        <span class="work-title">Machbare Utopien, MA7, Kongressbad</span>
+        <span class="work-location">Vienna</span>
+      </div>
+      <div class="work-item">
+        <span class="work-year">2023</span>
+        <span class="work-title">Intra-Actions: Existence is not an Individual Matter — Venice Biennial, Palazzo Mora</span>
+        <span class="work-location">Venice</span>
+      </div>
+      <div class="work-item">
+        <span class="work-year">2022</span>
+        <span class="work-title">Urban Soundscapes — Wiener Festwochen, Meidlinger Markt</span>
+        <span class="work-location">Vienna</span>
+      </div>
+      <div class="work-item">
+        <span class="work-year">2020</span>
+        <span class="work-title">In Transition — Art Start 2020, Gallery Credo Bonum &amp; Goethe-Institut Bulgaria</span>
+        <span class="work-location">Sofia</span>
+      </div>
+      <div class="work-item">
+        <span class="work-year">2019</span>
+        <span class="work-title">Shadows of Pleasure — Rising Ruins, Gallery ViArt</span>
+        <span class="work-location">Vienna / Luxembourg</span>
+      </div>
+      <div class="work-item">
+        <span class="work-year">2018</span>
+        <span class="work-title">Sound Letter — Zimmer, Küche, Kabinett, Brotfabrik</span>
+        <span class="work-location">Vienna</span>
+      </div>
+      <div class="work-item">
+        <span class="work-year">2017</span>
+        <span class="work-title">Mental Borders — Wiener Grenzgänge: Von Acht Bis Acht Durch Die Nacht</span>
+        <span class="work-location">Vienna</span>
+      </div>
+    </div>
+
+    <div class="work-category fade-up">
+      <p class="work-cat-title">Cultural Management</p>
+
+      <div class="work-item">
+        <span class="work-year">2021–24</span>
+        <span class="work-title">Wild im West — Co-founder &amp; Annual Programme Director (urban culture, music, performance, cinema)</span>
+        <span class="work-location">Vienna</span>
+      </div>
+      <div class="work-item">
+        <span class="work-year">2023–24</span>
+        <span class="work-title">VokaleVerwandlungen — International Choral Festival, Organiser</span>
+        <span class="work-location">Vienna</span>
+      </div>
+      <div class="work-item">
+        <span class="work-year">2020–23</span>
+        <span class="work-title">Social Design Summer School — Lecturer &amp; Researcher (Universität für Angewandte Kunst Wien / TU Wien)</span>
+        <span class="work-location">Vienna</span>
+      </div>
+      <div class="work-item">
+        <span class="work-year">2014–16</span>
+        <span class="work-title">Hip Hip Library &amp; Atelier — Events, artist co-selection, first Zine Fair (with Sofia University)</span>
+        <span class="work-location">Sofia</span>
+      </div>
+    </div>
+
+    <div class="work-category fade-up">
+      <p class="work-cat-title">Academic &amp; Research</p>
+
+      <div class="work-item">
+        <span class="work-year">2024</span>
+        <span class="work-title">DEMEDARTS: Dementia. Empathy. Education. Arts. — co-author, publication</span>
+        <span class="work-location">Vienna</span>
+      </div>
+      <div class="work-item">
+        <span class="work-year">2023–24</span>
+        <span class="work-title">Laundry Songs — Creative Research, Cultural and Historical Awareness for Active Citizenship</span>
+        <span class="work-location">Vienna</span>
+      </div>
+      <div class="work-item">
+        <span class="work-year">2023</span>
+        <span class="work-title">Lecturer — "To make what disappears, appear again" symposium, WUK Wien</span>
+        <span class="work-location">Vienna</span>
+      </div>
+      <div class="work-item">
+        <span class="work-year">2023</span>
+        <span class="work-title">Lecture/Performance — Venice Biennial, Palazzo Mora</span>
+        <span class="work-location">Venice</span>
+      </div>
+      <div class="work-item">
+        <span class="work-year">2022</span>
+        <span class="work-title">Intra-Actions: Existence is not an Individual Matter — publication, European Cultural Centre</span>
+        <span class="work-location">Venice</span>
+      </div>
+      <div class="work-item">
+        <span class="work-year">2020–24</span>
+        <span class="work-title">DemedArt — Research Assistant, Zentrum Didaktik für Kunst, Universität für Angewandte Kunst Wien</span>
+        <span class="work-location">Vienna</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <p class="section-label">Contact</p>
+    <div class="contact-grid fade-up">
+      <div>
+        <h2 class="contact-headline">Director, Bulgarian<br>Cultural Institute<br><em>Wittgenstein House</em></h2>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-item">
+          <span>Institution</span>
+          <span>Bulgarian Cultural Institute Wittgenstein House, Vienna</span>
+        </div>
+        <div class="contact-item">
+          <span>Location</span>
+          <span>Vienna, Austria</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Pavel Naydenov</p>
+  <p>Vienna, Austria</p>
+</footer>
+
+<script>
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.classList.add('visible');
+        observer.unobserve(el.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Trigger hero text immediately
+  document.querySelector('.hero-text').style.opacity = 1;
+</script>
+
+</body>
+</html>
